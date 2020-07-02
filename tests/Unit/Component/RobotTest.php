@@ -44,6 +44,29 @@ class RobotTest extends SimpleTestCase
             [new Report(), new Place(3, 4, Direction::SOUTH()), new Report()],
             Direction::SOUTH(), 3, 4
         ];
+
+        yield 'Invalid placement command is ignored' => [
+            [new Place(16, 23, Direction::SOUTH())],
+            null, null, null
+        ];
+
+        yield 'Multiple invalid placement commands are ignored' => [
+            [
+                new Place(-1, 23, Direction::SOUTH()),
+                new Place(5, 6, Direction::NORTH()),
+                new Place(0,  17, Direction::SOUTH())
+            ],
+            null, null, null
+        ];
+
+        yield 'Invalid placement instructions are ignored, but valid are accepted' => [
+            [
+                new Place(-1, 23, Direction::SOUTH()),
+                new Place(0,  4, Direction::EAST()),
+                new Place(17, 4, Direction::WEST()),
+            ],
+            Direction::EAST(), 0, 4
+        ];
     }
 
     /**
