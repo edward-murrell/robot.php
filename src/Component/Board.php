@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Robot\Component;
 
+/**
+ * Value holder for a simple square board.
+ */
 class Board
 {
     /**
