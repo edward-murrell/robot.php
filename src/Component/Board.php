@@ -37,4 +37,22 @@ class Board
     {
         return $this->height;
     }
+
+    /**
+     * Calculates if a given location is a valid location on the board.
+     *
+     * @param int $xLoc X location on East / West, where 0 is West.
+     * @param int $yLoc Y location on North / South, where 0 is South.
+     *
+     * @return bool True if location is valid, false if not.
+     */
+    public function isValidLocation(int $xLoc, int $yLoc): bool
+    {
+        return (
+            $xLoc >= 0 &&
+            $yLoc >= 0 &&
+            $xLoc < $this->getWidth() &&
+            $yLoc < $this->getHeight()
+        );
+    }
 }
