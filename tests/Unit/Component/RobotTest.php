@@ -9,6 +9,7 @@ use Robot\Enum\Direction;
 use Robot\Instruct\Left;
 use Robot\Instruct\Move;
 use Robot\Instruct\Place;
+use Robot\Instruct\Report;
 use Robot\Instruct\Right;
 use Robot\Tests\TestCases\SimpleTestCase;
 
@@ -37,6 +38,11 @@ class RobotTest extends SimpleTestCase
         yield 'Move, Left, Right commands do nothing when the robot has not been placed.' => [
             [new Place(1, 2, Direction::NORTH())],
             Direction::NORTH(), 1, 2
+        ];
+
+        yield 'Report instructions are ignored' => [
+            [new Report(), new Place(3, 4, Direction::SOUTH()), new Report()],
+            Direction::SOUTH(), 3, 4
         ];
     }
 
