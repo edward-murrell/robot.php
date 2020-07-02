@@ -67,6 +67,37 @@ class RobotTest extends SimpleTestCase
             ],
             Direction::EAST(), 0, 4
         ];
+
+        yield 'Place robot, and move South and West' => [
+            [
+                new Place(2, 3, Direction::WEST()),
+                new Left(),
+                new Move(),
+                new Right(),
+                new Move(),
+            ],
+            Direction::WEST(), 1, 2
+        ];
+
+        yield 'Place robot North East corner, and try to move off the edge' => [
+            [
+                new Place(4, 4, Direction::NORTH()),
+                new Move(),
+                new Right(),
+                new Move(),
+            ],
+            Direction::EAST(), 4, 4
+        ];
+
+        yield 'Place robot in South West corner, and try to move off the edge' => [
+            [
+                new Place(0, 0, Direction::SOUTH()),
+                new Move(),
+                new Right(),
+                new Move(),
+            ],
+            Direction::WEST(), 0, 0
+        ];
     }
 
     /**
