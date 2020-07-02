@@ -1,0 +1,17 @@
+PLACE 0,0,NORTH
+MOVE
+REPORT
+## This should output: 0,1,NORTH
+RIGHT
+MOVE
+LEFT
+MOVE
+RIGHT
+MOVE
+REPORT
+## The should output: 2,2,EAST
+PLACE 3,3,EAST
+LEFT
+MOVE
+REPORT
+## This should output 3,4,NORTH
