@@ -36,7 +36,16 @@ php bin/robot.php examples/complex.txt
 ```
 
 # Testing
-Toy Robot has good set of Unit Tests, and a functional tests of all files in `examples/`.
+Toy Robot has good set of Unit Tests, and a functional tests of all files in `examples/`. Static analysis should also
+ be run using `phpstan`.
+
+Once the requirements have been installed using composer indicated in the Installation section, run the following to
+ test the program.
+
+```shell script
+vendor/bin/phpunit
+vendor/bin/phpstan analyse --level=8 src tests
+```
 
 # Implementation Notes
 
