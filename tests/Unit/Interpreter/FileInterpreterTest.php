@@ -28,6 +28,11 @@ class FileInterpreterTest extends SimpleTestCase
             'examples/all.txt',
             [new Place(1, 2, Direction::SOUTH()), new Left(), new Right(), new Move(), new Report()]
         ];
+
+        yield 'Upstream Example A.' => [
+            'examples/exampleA.txt',
+            [new Place(0, 0, Direction::NORTH()), new Move(), new Report()]
+        ];
     }
 
     /**
