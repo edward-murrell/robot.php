@@ -25,7 +25,7 @@ class BoardTest extends SimpleTestCase
     /**
      * Get scenarios for requests if a given location is valid.
      *
-     * @return iterable<array<\Robot\Component\Board,int,int,bool>>
+     * @return iterable<array<\Robot\Component\Board|int|null|bool>>
      */
     public function getValidScenarios(): iterable
     {
@@ -39,19 +39,20 @@ class BoardTest extends SimpleTestCase
         yield [new Board(5, 5), 5, 5, false];
         yield [new Board(5, 5), 0, 15, false];
         yield [new Board(5, 5), -3, -2, false];
+        yield [new Board(5, 5), null, null, false];
     }
 
     /**
      * Tests a set of locations are valid.
      *
      * @param \Robot\Component\Board $board
-     * @param int $x X location on East / West
-     * @param int $y Y location on North / South
+     * @param int|null $x X location on East / West
+     * @param int|null $y Y location on North / South
      * @param bool $expected Expected response from isValidLocation
      *
      * @dataProvider getValidScenarios
      */
-    public function testIsValidLocation(Board $board, int $x, int $y, bool $expected): void
+    public function testIsValidLocation(Board $board, ?int $x, ?int $y, bool $expected): void
     {
         self::assertEquals($expected, $board->isValidLocation($x, $y));
     }
