@@ -5,3 +5,7 @@ July, 2020
 
 Requirements: PHP 7.4, composer 
 OR Docker
+
+# Implementation Notes
+- Atomic commits
+- Functional tests first
