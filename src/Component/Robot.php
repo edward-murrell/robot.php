@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Robot\Component;
 
 use Robot\Enum\Direction;
+use Robot\Instruct\InstructInterface;
 
 class Robot
 {
@@ -25,5 +26,13 @@ class Robot
     public function getYLoc(): ?int
     {
         return $this->yLoc;
+    }
+
+    /**
+     * Pass commmands to the robot. Invalid commands will be ignored, without error.
+     */
+    public function command(InstructInterface $instruction): void
+    {
+
     }
 }
