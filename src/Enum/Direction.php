@@ -15,8 +15,8 @@ use MyCLabs\Enum\Enum;
  */
 class Direction extends Enum
 {
-    private const NORTH = 'NORTH';
-    private const SOUTH = 'SOUTH';
-    private const EAST = 'EAST';
-    private const WEST = 'WEST';
+    private const NORTH = 0;
+    private const SOUTH = 2;
+    private const EAST = 1;
+    private const WEST = 3;
 }
