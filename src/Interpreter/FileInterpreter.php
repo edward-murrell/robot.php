@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Robot\Interpreter;
 
+use Exception;
 use Robot\Enum\Direction;
 use Robot\Instruct\InstructInterface;
 use Robot\Instruct\Left;
@@ -14,16 +15,24 @@ use Robot\Instruct\Right;
 class FileInterpreter implements InterpreterInterface
 {
     /**
-     * @var false|resource File handle for file to be read.
+     * @var resource File handle for file to be read.
      */
     private $fileHandle;
 
     /**
+     * Create an interpreter for a local file.
+     *
      * @param string $filepath Path to file of Robot move instructions.
+     *
+     * @throws \Exception Thrown if file could not be opened.
      */
     public function __construct(string $filepath)
     {
-        $this->fileHandle = fopen($filepath, 'r');
+        if (is_readable($filepath) === false ||
+            !$handle = fopen($filepath, 'r')) {
+            throw new Exception("Could not open {$filepath}");
+        }
+        $this->fileHandle = $handle;
     }
 
     public function __destruct()
@@ -74,6 +83,6 @@ class FileInterpreter implements InterpreterInterface
                 $directionInt = new Direction(Direction::values()[$matches[5]]);
                 return new Place((int) $matches[3], (int) $matches[4], new Direction($directionInt));
         }
-        throw new \Exception('Unexpected unknown instruction in file interpreter.');
+        throw new Exception('Unexpected unknown instruction in file interpreter.');
     }
 }
