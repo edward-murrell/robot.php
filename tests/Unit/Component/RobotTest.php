@@ -98,6 +98,22 @@ class RobotTest extends SimpleTestCase
             ],
             Direction::WEST(), 0, 0
         ];
+
+        yield 'Test for turning left across modulo boundary' => [
+            [
+                new Place(0, 0, Direction::NORTH()),
+                new Left(),
+            ],
+            Direction::WEST(), 0, 0
+        ];
+
+        yield 'Test for turning right across modulo boundary' => [
+            [
+                new Place(0, 0, Direction::WEST()),
+                new Right(),
+            ],
+            Direction::NORTH(), 0, 0
+        ];
     }
 
     /**
