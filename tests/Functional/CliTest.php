@@ -31,6 +31,11 @@ class CliTest extends CliTestCase
             'examples/exampleC.txt',
             ['3,3,NORTH']
         ];
+
+        yield 'Complex generated example.' => [
+            'examples/complex.txt',
+            ['0,1,NORTH', '2,2,EAST', '3,4,NORTH']
+        ];
     }
 
     /**
