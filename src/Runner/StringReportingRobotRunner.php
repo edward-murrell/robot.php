@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Robot\Runner;
 
 use Robot\Component\Robot;
+use Robot\Instruct\Report;
 use Robot\Interpreter\InterpreterInterface;
 use Robot\Tests\TestCases\SimpleTestCase;
 
@@ -19,10 +20,30 @@ class StringReportingRobotRunner extends SimpleTestCase
         $this->robot = $robot;
     }
 
+    /**
+     * Run a set of instructions on the robot, and return any report responses.
+     *
+     * @param \Robot\Interpreter\InterpreterInterface $interpreter
+     *
+     * @return iterable<string>
+     */
     public function runInstructions(InterpreterInterface $interpreter): iterable
     {
         foreach ($interpreter->getInstructions() as $instruction) {
-            yield;
+            $this->robot->command($instruction);
+            if ($instruction instanceof Report && $this->robot->getDirection() !== null) {
+                yield $this->createReportString($this->robot);
+            }
         }
+    }
+
+    /**
+     * Create a report string in the format of X,Y,DIRECTION.
+     *
+     * NOTE: This method takes the robot as a method parameter to ease future refactoring.
+     */
+    private function createReportString(Robot $robot): string
+    {
+        return \sprintf('%s,%s,%s', $robot->getXLoc(), $robot->getYLoc(), $robot->getDirection()->getKey());
     }
 }
