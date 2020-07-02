@@ -5,14 +5,29 @@ namespace Robot\Component;
 
 use Robot\Enum\Direction;
 use Robot\Instruct\InstructInterface;
+use Robot\Instruct\Place;
 
 class Robot
 {
+    private Board $board;
+
     private ?Direction $direction = null;
 
     private ?int $xLoc = null;
 
     private ?int $yLoc = null;
+
+    /**
+     * Create a robot with the board it plays on.
+     *
+     * Robot is not placed on to the board until a valid place command is issued.
+     *
+     * @param \Robot\Component\Board $board
+     */
+    public function __construct(Board $board)
+    {
+        $this->board = $board;
+    }
 
     public function getDirection(): ?Direction
     {
@@ -33,6 +48,10 @@ class Robot
      */
     public function command(InstructInterface $instruction): void
     {
-
+        if ($instruction instanceof Place) {
+            $this->xLoc = $instruction->getX();
+            $this->yLoc = $instruction->getY();
+            $this->direction = $instruction->getDirection();
+        }
     }
 }
