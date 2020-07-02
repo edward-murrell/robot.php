@@ -46,4 +46,15 @@ class FileInterpreterTest extends SimpleTestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * Files that cannot be opened will throw an exception.
+     */
+    public function testBadFilePath(): void
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Could not open /not/a/real/path');
+
+        new FileInterpreter('/not/a/real/path');
+    }
 }
