@@ -10,10 +10,29 @@ use Robot\Tests\TestCases\CliTestCase;
  */
 class CliTest extends CliTestCase
 {
-    public function testInputCapture(): void
+    /**
+     * Get list of successful scenarios.
+     *
+     * @return iterable<string, array<string>> Filepath to input, and list of expected output.
+     */
+    public function getSuccessfulScenarios(): iterable
     {
-        $inputFile = 'tests/Scenarios/exampleA.txt';
-        $expected = ['0,1,NORTH'];
+        yield 'Example A, simple test.' => [
+            'tests/Scenarios/exampleA.txt',
+            ['0,1,NORTH']
+        ];
+    }
+
+    /**
+     * Test input and output of simple scenarios.
+     *
+     * @dataProvider getSuccessfulScenarios
+     *
+     * @param string $inputFile
+     * @param array $expected
+     */
+    public function testInputCapture(string $inputFile, array $expected): void
+    {
         $binary = 'php ' . dirname(__DIR__, 2) . '/bin/robot.php';
 
         $actual = [];
