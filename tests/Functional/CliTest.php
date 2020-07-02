@@ -18,17 +18,17 @@ class CliTest extends CliTestCase
     public function getSuccessfulScenarios(): iterable
     {
         yield 'Example A, single response, provided in PROBLEM.md.' => [
-            'tests/Functional/Scenarios/exampleA.txt',
+            'examples/exampleA.txt',
             ['0,1,NORTH']
         ];
 
         yield 'Example B, single response, provided in PROBLEM.md.' => [
-            'tests/Functional/Scenarios/exampleB.txt',
+            'examples/exampleB.txt',
             ['0,0,WEST']
         ];
 
         yield 'Example C, single response, provided in PROBLEM.md.' => [
-            'tests/Functional/Scenarios/exampleC.txt',
+            'examples/exampleC.txt',
             ['3,3,NORTH']
         ];
     }

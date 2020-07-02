@@ -25,7 +25,7 @@ class FileInterpreterTest extends SimpleTestCase
     public function getSimpleScenarios(): iterable
     {
         yield 'List of all instructions.' => [
-            'tests/Functional/Scenarios/all.txt',
+            'examples/all.txt',
             [new Place(1, 2, Direction::SOUTH()), new Left(), new Right(), new Move(), new Report()]
         ];
     }
