@@ -64,7 +64,11 @@ class FileInterpreter implements InterpreterInterface
     private function convertLine(string $line): ?InstructInterface
     {
         $matches = [];
-        if (0 === preg_match(                '/^(MOVE|LEFT|RIGHT|REPORT)|(?:(PLACE)\s+(\d+)\,(\d+)\,(NORTH|SOUTH|EAST|WEST))/',               $line,               $matches           )) {
+        if (0 === preg_match(
+        '/^(MOVE|LEFT|RIGHT|REPORT)|(?:(PLACE)\s+(\d+)\,(\d+)\,(NORTH|SOUTH|EAST|WEST))/',
+                $line,
+                $matches
+            )) {
                 return null;
             }
         switch ($matches[1]) {
