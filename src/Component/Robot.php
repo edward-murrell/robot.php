@@ -49,6 +49,17 @@ class Robot
     public function command(InstructInterface $instruction): void
     {
         if ($instruction instanceof Place) {
+            $this->place($instruction);
+        }
+    }
+
+    private function place(Place $instruction): void
+    {
+        if ($instruction->getX() >= 0 &&
+            $instruction->getY() >= 0 &&
+            $instruction->getX() < $this->board->getHeight() &&
+            $instruction->getY() < $this->board->getHeight()
+        ) {
             $this->xLoc = $instruction->getX();
             $this->yLoc = $instruction->getY();
             $this->direction = $instruction->getDirection();
