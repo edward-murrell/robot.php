@@ -71,7 +71,8 @@ class FileInterpreter implements InterpreterInterface
         }
         switch ($matches[2]) {
             case 'PLACE':
-                return new Place((int) $matches[3], (int) $matches[4], new Direction($matches[5]));
+                $directionInt = new Direction(Direction::values()[$matches[5]]);
+                return new Place((int) $matches[3], (int) $matches[4], new Direction($directionInt));
         }
         throw new \Exception('Unexpected unknown instruction in file interpreter.');
     }
