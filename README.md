@@ -8,6 +8,33 @@ July, 2020
 
 Requirements: PHP 7.4, composer
 
+# Description
+- The application is a simulation of a toy robot moving on a square tabletop,
+  of dimensions 5 units x 5 units.
+- There are no other obstructions on the table surface.
+- The robot is free to roam around the surface of the table, but is
+  prevented from falling to destruction. Any movement that would result in the
+  robot falling from the table is prevented, but further valid movement commands
+  are allowed.
+- Commands are read in from a text file, provided at run time.
+- PLACE will put the toy robot on the table in position X,Y and facing NORTH,
+  SOUTH, EAST or WEST.
+- X is West to East, and Y is South to North, and co-ordinates start from 0.
+  0,0 is the South-West corner, 4,0 is the South-East corner, and 4,4 is the
+  North-East Corner.
+- The first valid command to the robot is a PLACE command, after that, any
+  sequence of commands be issued, in any order, including another PLACE
+  command. The application discards all commands in the sequence until
+  a valid PLACE command has been executed.
+- MOVE will move the toy robot one unit forward in the direction it is
+  currently facing.
+- LEFT and RIGHT will rotate the robot 90 degrees in the specified direction
+  without changing the position of the robot.
+- REPORT will announce the X,Y and Direction of the robot. This in same format
+  as the input. ie; 2,3,NORTH
+- A robot that is not on the table ignores the MOVE, LEFT, RIGHT and REPORT commands.
+- Example inputs can be found in the `examples/` directory.
+
 # Requirements
 - PHP 7.4
 - Composer (https://getcomposer.org)
