@@ -1,6 +1,9 @@
 Toy Robot simulator
+
 Edward Murrell
+
 edward.murrell@codefoundation.com.au, edward@murrell.co.nz
+
 July, 2020
 
 Requirements: PHP 7.4, composer
@@ -10,8 +13,9 @@ Requirements: PHP 7.4, composer
 - Composer (https://getcomposer.org)
 
 # Installation
-This program has dependencies installed by composer.
-The following command needs to be run before to install dependencies.
+This program has dependencies installed by composer required for running the application.
+
+Run the following command to install dependencies.
 
 ```shell script
 composer install -n
