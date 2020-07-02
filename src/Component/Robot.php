@@ -81,7 +81,7 @@ class Robot
         }
         /** @var int $value */
         $value = $this->direction->getValue();
-        $newDirection = (($value - 1) % 4);
+        $newDirection = (($value - 1 + 4) % 4);
         $this->direction = new Direction($newDirection);
     }
 
