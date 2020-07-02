@@ -20,7 +20,7 @@ class FileInterpreterTest extends SimpleTestCase
     /**
      * Get files and expected instructions from files that have no unexpected input.
      *
-     * @return iterable<string, array<\Robot\Instruct\InstructInterface>> Filepath to input, and list of expected instructions.
+     * @return iterable<array<string|array<\Robot\Instruct\InstructInterface>>> Filepath to input, and list of expected instructions.
      */
     public function getSimpleScenarios(): iterable
     {

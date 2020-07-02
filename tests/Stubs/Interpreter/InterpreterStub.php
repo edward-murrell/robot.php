@@ -17,6 +17,9 @@ class InterpreterStub implements InterpreterInterface
      */
     private array $instructions;
 
+    /**
+     * @param array<\Robot\Instruct\InstructInterface> $instructions
+     */
     public function __construct(array $instructions)
     {
         $this->instructions = $instructions;

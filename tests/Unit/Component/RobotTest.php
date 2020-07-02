@@ -21,7 +21,7 @@ class RobotTest extends SimpleTestCase
     /**
      * Return list of instructions for placing a robot, then it's expected locations
      *
-     * @return iterable<array<\Robot\Instruct\InstructInterface>,array<int|null,int|null,\Robot\Enum\Direction|null>>
+     * @return iterable<array<array<\Robot\Instruct\InstructInterface>>|array<int|\Robot\Enum\Direction|null>>
      */
     public function getInstructionLists(): iterable
     {
@@ -119,10 +119,10 @@ class RobotTest extends SimpleTestCase
     /**
      * Test instructions result in a location.
      *
-     * @param iterable $instructions
+     * @param array<\Robot\Instruct\InstructInterface> $instructions
      * @param \Robot\Enum\Direction|null $expectedDirection
-     * @param int|null $expectedX
-     * @param int|null $expectedY
+     * @param int|null $expectedX Expected X location
+     * @param int|null $expectedY Expected Y location
      *
      * @dataProvider getInstructionLists
      */

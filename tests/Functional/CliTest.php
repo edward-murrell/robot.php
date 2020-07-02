@@ -13,7 +13,7 @@ class CliTest extends CliTestCase
     /**
      * Get list of successful scenarios.
      *
-     * @return iterable<string, array<string>> Filepath to input, and list of expected output.
+     * @return iterable<array<string|array<string>>> Filepath to input, and list of expected output.
      */
     public function getSuccessfulScenarios(): iterable
     {
@@ -38,8 +38,8 @@ class CliTest extends CliTestCase
      *
      * @dataProvider getSuccessfulScenarios
      *
-     * @param string $inputFile
-     * @param array $expected
+     * @param string $inputFile Path to input file, from root.
+     * @param array<string> $expected List of expected strings.
      */
     public function testInputCapture(string $inputFile, array $expected): void
     {

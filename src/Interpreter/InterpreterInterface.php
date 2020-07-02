@@ -16,7 +16,7 @@ interface InterpreterInterface
      *
      * This may be an array, but where possible, should be a generator to minimise memory usage.
      *
-     * @return iterable<\Robot\Instruct\InstructInterface
+     * @return iterable<\Robot\Instruct\InstructInterface>
      */
     public function getInstructions(): iterable;
 }

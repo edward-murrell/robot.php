@@ -25,9 +25,9 @@ class StringReportingRobotRunner extends SimpleTestCase
      *
      * @param \Robot\Interpreter\InterpreterInterface $interpreter
      *
-     * @return iterable<string>
+     * @return \Traversable<string>
      */
-    public function runInstructions(InterpreterInterface $interpreter): iterable
+    public function runInstructions(InterpreterInterface $interpreter): \Traversable
     {
         foreach ($interpreter->getInstructions() as $instruction) {
             $this->robot->command($instruction);

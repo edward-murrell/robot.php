@@ -34,9 +34,9 @@ class FileInterpreter implements InterpreterInterface
     /**
      * Get list of instructions from the input file.
      *
-     * @return iterable<\Robot\Instruct\InstructInterface>
+     * @return \Traversable<\Robot\Instruct\InstructInterface>
      */
-    public function getInstructions(): iterable
+    public function getInstructions(): \Traversable
     {
         while ($line = fgets($this->fileHandle)) {
             $instruction = $this->convertLine($line);
