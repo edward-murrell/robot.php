@@ -5,7 +5,10 @@ namespace Robot\Component;
 
 use Robot\Enum\Direction;
 use Robot\Instruct\InstructInterface;
+use Robot\Instruct\Left;
+use Robot\Instruct\Move;
 use Robot\Instruct\Place;
+use Robot\Instruct\Right;
 
 class Robot
 {
@@ -50,19 +53,69 @@ class Robot
     {
         if ($instruction instanceof Place) {
             $this->place($instruction);
+        } elseif ($instruction instanceof Left) {
+            $this->turnLeft();
+        } elseif ($instruction instanceof Right) {
+            $this->turnRight();
+        } elseif ($instruction instanceof Move) {
+            $this->move();
         }
     }
 
     private function place(Place $instruction): void
     {
-        if ($instruction->getX() >= 0 &&
-            $instruction->getY() >= 0 &&
-            $instruction->getX() < $this->board->getHeight() &&
-            $instruction->getY() < $this->board->getHeight()
-        ) {
+        if ($this->board->isValidLocation(
+            $instruction->getX(),
+            $instruction->getY()
+        )) {
             $this->xLoc = $instruction->getX();
             $this->yLoc = $instruction->getY();
             $this->direction = $instruction->getDirection();
+        }
+    }
+
+    private function turnLeft(): void
+    {
+        if ($this->direction === null) {
+            return;
+        }
+        /** @var int $value */
+        $value = $this->direction->getValue();
+        $newDirection = (($value - 1) % 4);
+        $this->direction = new Direction($newDirection);
+    }
+
+    private function turnRight(): void
+    {
+        if ($this->direction === null) {
+            return;
+        }
+        /** @var int $value */
+        $value = $this->direction->getValue();
+        $newDirection = (($value + 1) % 4);
+        $this->direction = new Direction($newDirection);
+    }
+
+    public function move(): void
+    {
+        if ($this->direction === null) {
+            return;
+        }
+        if ($this->direction->equals(Direction::NORTH()) &&
+            $this->board->isValidLocation($this->xLoc, $this->yLoc + 1)) {
+            $this->yLoc++;
+        }
+        elseif ($this->direction->equals(Direction::SOUTH()) &&
+            $this->board->isValidLocation($this->xLoc, $this->yLoc - 1)) {
+            $this->yLoc--;
+        }
+        elseif ($this->direction->equals(Direction::EAST()) &&
+            $this->board->isValidLocation($this->xLoc + 1, $this->yLoc)) {
+            $this->xLoc++;
+        }
+        elseif ($this->direction->equals(Direction::WEST()) &&
+            $this->board->isValidLocation($this->xLoc - 1, $this->yLoc)) {
+            $this->xLoc--;
         }
     }
 }
