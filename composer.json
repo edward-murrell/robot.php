@@ -1,4 +1,14 @@
 {
+    "autoload": {
+        "psr-4": {
+            "Robot\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Robot\\Tests\\": "tests/"
+        }
+    },
     "require": {
         "phpunit/phpunit": "^9.2"
     }
