@@ -18,44 +18,53 @@ use Robot\Tests\TestCases\SimpleTestCase;
 class RobotTest extends SimpleTestCase
 {
     /**
-     * Requesting status of robot before placing returns null.
+     * Return list of instructions for placing a robot, then it's expected locations
+     *
+     * @return iterable<array<\Robot\Instruct\InstructInterface>,array<int|null,int|null,\Robot\Enum\Direction|null>>
      */
-    public function testGettersBeforePlacement(): void
+    public function getInstructionLists(): iterable
     {
-        $robot = new Robot(new Board(5, 5));
+        yield 'Requesting status of robot before placing returns null' => [
+            [],
+            null, null, null
+        ];
 
-        $this->assertNull($robot->getDirection());
-        $this->assertNull($robot->getXLoc());
-        $this->assertNull($robot->getYLoc());
+        yield 'Place command sets location.' => [
+            [new Move(), new Left(), new Right()],
+            null, null, null
+        ];
+
+        yield 'Move, Left, Right commands do nothing when the robot has not been placed.' => [
+            [new Place(1, 2, Direction::NORTH())],
+            Direction::NORTH(), 1, 2
+        ];
     }
 
     /**
-     * Move, Left, Right commands do nothing when the robot has not been placed.
+     * Test instructions result in a location.
+     *
+     * @param iterable $instructions
+     * @param \Robot\Enum\Direction|null $expectedDirection
+     * @param int|null $expectedX
+     * @param int|null $expectedY
+     *
+     * @dataProvider getInstructionLists
      */
-    public function testRequestingMove(): void
+    public function testRequestingPlace(
+        iterable $instructions,
+        ?Direction $expectedDirection,
+        ?int $expectedX,
+        ?int $expectedY
+    ): void
     {
         $robot = new Robot(new Board(5, 5));
 
-        $robot->command(new Move());
-        $robot->command(new Left());
-        $robot->command(new Right());
+        foreach ($instructions as $instruction) {
+            $robot->command($instruction);
+        }
 
-        $this->assertNull($robot->getDirection());
-        $this->assertNull($robot->getXLoc());
-        $this->assertNull($robot->getYLoc());
-    }
-
-    /**
-     * Place command sets location.
-     */
-    public function testRequestingPlace(): void
-    {
-        $robot = new Robot(new Board(5, 5));
-
-        $robot->command(new Place(1, 2, Direction::NORTH()));
-
-        $this->assertEquals(Direction::NORTH(), $robot->getDirection());
-        $this->assertEquals(1, $robot->getXLoc());
-        $this->assertEquals(2, $robot->getYLoc());
+        $this->assertEquals($expectedDirection, $robot->getDirection());
+        $this->assertEquals($expectedX, $robot->getXLoc());
+        $this->assertEquals($expectedY, $robot->getYLoc());
     }
 }
