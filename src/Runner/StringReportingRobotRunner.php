@@ -44,6 +44,7 @@ class StringReportingRobotRunner extends SimpleTestCase
      */
     private function createReportString(Robot $robot): string
     {
-        return \sprintf('%s,%s,%s', $robot->getXLoc(), $robot->getYLoc(), $robot->getDirection()->getKey());
+        $direction = $robot->getDirection() !== null ? $robot->getDirection()->getKey() : '';
+        return \sprintf('%s,%s,%s', $robot->getXLoc(), $robot->getYLoc(), $direction);
     }
 }
